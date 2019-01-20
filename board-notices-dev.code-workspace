@@ -16,6 +16,9 @@
 	"settings": {
 		"phpcs.executablePath": "../phpbb/phpBB/vendor/bin/phpcs",
 		"phpcs.autoConfigSearch": false,
-		"phpcs.standard": "../phpbb/build/code_sniffer/ruleset-php-extensions.xml"
+		"phpcs.standard": "../phpbb/build/code_sniffer/ruleset-php-extensions.xml",
+		"files.exclude": {
+			"**/phpBB/ext/*": true
+		}
 	}
 }
