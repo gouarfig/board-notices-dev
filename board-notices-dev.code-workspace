@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"path": "boardnotices"
+		},
+		{
+			"path": "phpbb"
+		},
+		{
+			"path": "dev"
+		},
+		{
+			"path": "skeleton"
+		}
+	],
+	"settings": {
+		"phpcs.executablePath": "../phpbb/phpBB/vendor/bin/phpcs",
+		"phpcs.autoConfigSearch": false,
+		"phpcs.standard": "../phpbb/build/code_sniffer/ruleset-php-extensions.xml"
+	}
+}

@@ -1,0 +1,62 @@
+imports:
+    - { resource: parameters.yml }
+
+services:
+    test.test.controller.main:
+        class: test\test\controller\main_controller
+        arguments:
+            - '@config'
+            - '@controller.helper'
+            - '@template'
+            - '@language'
+
+    test.test.controller.acp:
+        class: test\test\controller\acp_controller
+        arguments:
+            - '@config'
+            - '@language'
+            - '@log'
+            - '@request'
+            - '@template'
+            - '@user'
+
+    test.test.service:
+        class: test\test\service
+        arguments:
+            - '@user'
+            - '%test.test.tables.test_table%'
+
+    test.test.listener:
+        class: test\test\event\main_listener
+        arguments:
+            - '@controller.helper'
+            - '@template'
+            - '@language'
+            - '%core.php_ext%'
+        tags:
+            - { name: event.listener }
+
+    test.test.command.sample:
+        class: test\test\console\command\sample
+        arguments:
+            - '@user'
+        tags:
+            - { name: console.command }
+
+    test.test.cron.task.sample:
+        class: test\test\cron\task\sample
+        arguments:
+            - '@config'
+        calls:
+            - [set_name, [test.test.cron.task.sample]]
+        tags:
+            - { name: cron.task }
+
+    test.test.notification.type.sample:
+        class: test\test\notification\type\sample
+        shared: false # service MUST not be shared for this to work!
+        parent: notification.type.base
+        calls:
+            - [set_controller_helper, ['@controller.helper']]
+        tags:
+            - { name: notification.type }

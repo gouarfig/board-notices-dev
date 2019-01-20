@@ -1,0 +1,2 @@
+parameters:
+    test.test.tables.test_table: '%core.table_prefix%test_test_table'
