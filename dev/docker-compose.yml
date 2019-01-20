@@ -35,7 +35,7 @@ services:
     env_file: .env
     volumes:
       - ${SHARE_WEB_DIR}:${PHP_CONTAINER_WEB_DIR}
-      #- ${PHPBB_CONFIG_FILE}:${PHPBB_CONTAINER_CONFIG_FILE}
+      - ${PHPBB_CONFIG_FILE}:${PHPBB_CONTAINER_CONFIG_FILE}
 
   mail:
     image: mailhog/mailhog
