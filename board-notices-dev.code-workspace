@@ -11,6 +11,9 @@
 		},
 		{
 			"path": "skeleton"
+		},
+		{
+			"path": "epv"
 		}
 	],
 	"settings": {
