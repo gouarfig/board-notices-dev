@@ -14,6 +14,9 @@
 		},
 		{
 			"path": "epv"
+		},
+		{
+			"path": "boardannouncements"
 		}
 	],
 	"settings": {
