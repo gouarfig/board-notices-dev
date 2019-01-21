@@ -22,6 +22,7 @@
 		"phpcs.standard": "../phpbb/build/code_sniffer/ruleset-php-extensions.xml",
 		"files.exclude": {
 			"**/phpBB/ext/*": true
-		}
+		},
+		"php.suggest.basic": false
 	}
 }
