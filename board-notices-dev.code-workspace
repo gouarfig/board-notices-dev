@@ -23,6 +23,7 @@
 		"files.exclude": {
 			"**/phpBB/ext/*": true
 		},
-		"php.suggest.basic": false
+		"php.suggest.basic": false,
+		"editor.insertSpaces": false
 	}
 }
