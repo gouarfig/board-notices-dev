@@ -27,6 +27,7 @@
 			"**/phpBB/ext/*": true
 		},
 		"php.suggest.basic": false,
-		"editor.insertSpaces": false
+		"editor.insertSpaces": false,
+		"eslint.nodePath": "../dev/",
 	}
 }
