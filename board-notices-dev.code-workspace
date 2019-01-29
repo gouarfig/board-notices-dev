@@ -29,5 +29,11 @@
 		"php.suggest.basic": false,
 		"editor.insertSpaces": false,
 		"eslint.nodePath": "../dev/",
+		"files.associations": {
+			"*.html": "twig"
+		},
+		"emmet.includeLanguages": {
+			"twig": "html"
+		},
 	}
 }
