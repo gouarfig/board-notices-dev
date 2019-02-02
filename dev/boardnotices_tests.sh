@@ -7,7 +7,7 @@ rsync -avz --exclude "*/.git/*" --exclude "*/coverage/*" --delete boardnotices .
 epv/src/EPV.php run --dir="phpbb/phpBB/ext/fq/boardnotices/"
 cd phpbb
 phpBB/vendor/bin/phpunit \
-  --configuration phpBB/ext/fq/boardnotices/phpunit.xml.dist \
+  --configuration phpBB/ext/fq/boardnotices/phpunit.xml \
   --bootstrap tests/bootstrap.php \
   --testsuite "Extension Test Suite" \
   $@
