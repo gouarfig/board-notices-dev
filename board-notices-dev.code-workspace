@@ -35,5 +35,10 @@
 		"emmet.includeLanguages": {
 			"twig": "html"
 		},
+		"phpunit.args": [
+			"--configuration", "../boardnotices/phpunit.xml",
+			"--bootstrap", "../phpbb/tests/bootstrap.php",
+			"--include-path", "../phpbb/",
+		],
 	}
 }
