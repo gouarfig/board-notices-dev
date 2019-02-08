@@ -8,5 +8,6 @@ pwd
 phpBB/vendor/bin/phpunit \
   --configuration phpBB/ext/fq/boardnotices/phpunit.xml \
   --bootstrap tests/bootstrap.php \
+  --debug --verbose \
   $@
 
