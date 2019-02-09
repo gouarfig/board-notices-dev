@@ -5,7 +5,7 @@ rsync -avz --exclude "*/.git/*" --exclude "*/coverage/*" --delete boardnotices p
 cd phpbb
 echo Starting phpunit from
 pwd
-phpBB/vendor/bin/phpunit \
+php -c /etc/php.ini.default phpBB/vendor/bin/phpunit \
   --configuration phpBB/ext/fq/boardnotices/phpunit.xml \
   --bootstrap tests/bootstrap.php \
   --debug --verbose \
