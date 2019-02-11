@@ -1,0 +1,65 @@
+version: '2.1'
+
+services:
+  mysql:
+    image: ${MYSQL_IMAGE}:${MYSQL_VERSION_TAG}
+    container_name: ${PROJECT_NAME}_db
+    env_file: .env
+    networks:
+      phpbb:
+        aliases:
+          - db
+    volumes:
+      - ${MYSQL_SEED}:/docker-entrypoint-initdb.d/phpbb.sql
+      - ${MYSQL_DATA_FOLDER}:/var/lib/mysql
+    ports:
+      - ${DOCKER_PUBLIC_IP:-0.0.0.0}:${MYSQL_EXPORT_PORT}:3306
+
+  phpmyadmin:
+    image: ${PHPMYADMIN_IMAGE}:${PHPMYADMIN_VERSION_TAG}
+    container_name: ${PROJECT_NAME}_phpmyadmin
+    depends_on:
+      - mysql
+    networks:
+      - phpbb
+    ports:
+      - ${DOCKER_PUBLIC_IP:-0.0.0.0}:${PHPMYADMIN_HTTP_PORT}:80
+
+  fpm:
+    image: ${PHP_IMAGE}
+    container_name: ${PROJECT_NAME}_php
+    depends_on:
+      - mysql
+    networks:
+      - phpbb
+    env_file: .env
+    volumes:
+      - ${SHARE_WEB_DIR}:${PHP_CONTAINER_WEB_DIR}
+      - ${PHPBB_CONFIG_FILE}:${PHPBB_CONTAINER_CONFIG_FILE}
+
+  mail:
+    image: mailhog/mailhog
+    container_name: ${PROJECT_NAME}_mailhog
+    networks:
+      - phpbb
+    ports:
+      - ${DOCKER_PUBLIC_IP:-0.0.0.0}:1025:1025
+      - ${DOCKER_PUBLIC_IP:-0.0.0.0}:8025:8025
+
+  httpd:
+    image: ${HTTPD_IMAGE}
+    container_name: ${PROJECT_NAME}_httpd
+    depends_on:
+      - fpm
+    networks:
+      - phpbb
+    ports:
+      - ${DOCKER_PUBLIC_IP:-0.0.0.0}:${LOCAL_HTTP_PORT}:80
+      - ${DOCKER_PUBLIC_IP:-0.0.0.0}:${LOCAL_HTTPS_PORT}:443
+    volumes:
+      - ${HTTPD_CONFIGURATION}:/usr/local/apache2/conf/httpd.conf
+      - ${SHARE_WEB_DIR}:${HTTP_CONTAINER_WEB_DIR}
+
+networks:
+  phpbb:
+    driver: bridge
