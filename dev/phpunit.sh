@@ -3,7 +3,7 @@
 PARAMETERS=$@
 echo "Parameters sent: ${PARAMETERS}"
 
-php -i | grep "xdebug.remote"
+# php -i | grep "xdebug.remote"
 
 export XDEBUG_CONFIG="idekey=VSCODE"
 php phpBB/vendor/bin/phpunit \

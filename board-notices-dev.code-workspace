@@ -35,12 +35,5 @@
 		"emmet.includeLanguages": {
 			"twig": "html"
 		},
-		"better-phpunit.docker.enable": true,
-		"better-phpunit.docker.command": "docker exec phpbb_php",
-		"better-phpunit.phpunitBinary": "/phpbb/phpunit.sh",
-		"better-phpunit.docker.paths": {
-			"/Volumes/External_SSD/Development/board-notices-dev/boardnotices": "/phpbb/phpBB/ext/fq/boardnotices",
-			"/Volumes/External_SSD/Development/board-notices-dev/phpbb": "/phpbb"
-		},
 	}
 }

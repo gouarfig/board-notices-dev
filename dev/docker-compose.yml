@@ -23,6 +23,8 @@ services:
       - mysql
     networks:
       - phpbb
+    extra_hosts:
+      - "gateway.internal:172.111.0.1"
     env_file: .env
     volumes:
       - ${XDEBUG_CONFIG}:${XDEBUG_CONTAINER_CONFIG}
@@ -36,3 +38,8 @@ services:
 networks:
   phpbb:
     driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.111.0.0/16
+        gateway: 172.111.0.1
