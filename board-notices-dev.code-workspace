@@ -7,16 +7,13 @@
 			"path": "phpbb"
 		},
 		{
-			"path": "dev"
-		},
-		{
 			"path": "skeleton"
 		},
 		{
 			"path": "epv"
 		},
 		{
-			"path": "boardannouncements"
+			"path": "dev"
 		}
 	],
 	"settings": {
@@ -43,8 +40,9 @@
 			"**/node_modules/**",
 			"**/bower_components/**",
 			"**/vendor/**/{Test,test,Tests,tests}/**",
-			"**/dev/data/*",
-			"**/dev/phpbb/*"
+			"**/phpBB/ext/**",
+			"**/dev/data/**",
+			"**/dev/phpbb/**"
 		]
 	}
 }
