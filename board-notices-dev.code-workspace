@@ -24,7 +24,8 @@
 		"phpcs.autoConfigSearch": false,
 		"phpcs.standard": "../phpbb/build/code_sniffer/ruleset-php-extensions.xml",
 		"files.exclude": {
-			"**/phpBB/ext/*": true
+			"**/phpBB/ext/*": true,
+			"**/dev/data/*": true
 		},
 		"php.suggest.basic": false,
 		"editor.insertSpaces": false,
