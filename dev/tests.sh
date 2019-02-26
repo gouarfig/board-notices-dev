@@ -1,15 +1,19 @@
 #!/usr/bin/env bash
 
+# Make sure the script was started like ./tests.sh (meaning the current directory is where the script is located)
+[[ -e tests.sh ]] || { echo >&2 "Please cd into the script folder before running this script."; exit 1; }
+
 # name of ramdisk volume
 volume_name=phpbb
 # size of ramdisk in MB
 size=200
 
+coverage_folder=$PWD/coverage/
 extension_name=boardnotices
 extension_path=phpBB/ext/fq/
 
 sectors=$(( ${size} * 1024 * 1024 / 512 ))
-mount_point=./${volume_name}
+mount_point=${TMPDIR}${volume_name}
 
 # Creating, formatting and mounting a volume in RAM
 mkdir -p ${mount_point}
@@ -31,8 +35,10 @@ php phpBB/vendor/bin/phpunit \
   --configuration ${extension_path}${extension_name}/phpunit.xml \
   --bootstrap tests/bootstrap.php \
   --testsuite "Extension Test Suite" \
-  --coverage-html ../coverage/
+  --coverage-html ${coverage_folder}
 
 cd ..
 umount "${mount_point}"
 hdiutil detach ${dev}
+
+echo "Coverage is available at ${coverage_folder}index.html"
