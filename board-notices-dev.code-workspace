@@ -22,7 +22,6 @@
 		"phpcs.standard": "../phpbb/build/code_sniffer/ruleset-php-extensions.xml",
 		"files.exclude": {
 			"**/phpBB/ext": true,
-			"data": true,
 		},
 		"php.suggest.basic": false,
 		"editor.insertSpaces": false,
@@ -40,6 +39,7 @@
 			"**/bower_components/**",
 			"**/vendor/**/{Test,test,Tests,tests}/**",
 			"**/phpBB/ext/**",
+			"**/data",
 		]
 	}
 }
