@@ -1,2 +1,4 @@
-**/install
+**/coverage
+**/data
+**/node_modules
 **/.git
