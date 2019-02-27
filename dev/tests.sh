@@ -3,6 +3,15 @@
 # Make sure the script was started like ./tests.sh (meaning the current directory is where the script is located)
 [[ -e tests.sh ]] || { echo >&2 "Please cd into the script folder before running this script."; exit 1; }
 
+if [ -z "$TMPDIR" ]; then
+  echo "Warning: TMPVAR is empty - trying to use mktemp instead"
+  TMPDIR=`mktemp -d`
+  if [ -z "$TMPDIR" ]; then
+    TMPDIR="/tmp"
+  fi
+fi
+echo "Using temporary folder '$TMPDIR'"
+
 # name of ramdisk volume
 volume_name=phpbb
 # size of ramdisk in MB
@@ -13,14 +22,17 @@ extension_name=boardnotices
 extension_path=phpBB/ext/fq/
 
 sectors=$(( ${size} * 1024 * 1024 / 512 ))
-mount_point=${TMPDIR}${volume_name}
+mount_point=${TMPDIR}/${volume_name}
 
-# Creating, formatting and mounting a volume in RAM
 mkdir -p ${mount_point}
-dev=$(hdiutil attach -nomount ram://${sectors})
-newfs_hfs -v "${volume_name}" ${dev}
-mount -t hfs -o nobrowse $dev "${mount_point}"
-echo "Mounted ${volume_name} (${size} MB) at ${mount_point}"
+
+if [ "$(uname)" == "Darwin" ]; then
+  # Creating, formatting and mounting a volume in RAM
+  dev=$(hdiutil attach -nomount ram://${sectors})
+  newfs_hfs -v "${volume_name}" ${dev}
+  mount -t hfs -o nobrowse $dev "${mount_point}"
+  echo "Mounted ${volume_name} (${size} MB) at ${mount_point}"
+fi
 
 echo "Copying phpBB into ramdisk..."
 # Copying phpBB into ramdisk
@@ -38,7 +50,13 @@ php phpBB/vendor/bin/phpunit \
   --coverage-html ${coverage_folder}
 
 cd ..
-umount "${mount_point}"
-hdiutil detach ${dev}
+
+if [ "$(uname)" == "Darwin" ]; then
+  umount "${mount_point}"
+  hdiutil detach ${dev}
+else
+  # Better clean up afterward...
+  rm -rf ${mount_point}
+fi
 
 echo "Coverage is available at ${coverage_folder}index.html"
