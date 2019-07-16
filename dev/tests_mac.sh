@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Make sure the script was started like ./tests.sh (meaning the current directory is where the script is located)
-[[ -e tests.sh ]] || { echo >&2 "Please cd into the script folder before running this script."; exit 1; }
+# Make sure the script was started like ./tests_mac.sh (meaning the current directory is where the script is located)
+[[ -e tests_mac.sh ]] || { echo >&2 "Please cd into the script folder before running this script."; exit 1; }
 
 if [ -z "$TMPDIR" ]; then
   echo "Warning: TMPVAR is empty - trying to use mktemp instead"
@@ -20,6 +20,7 @@ size=200
 coverage_folder=$PWD/coverage/
 extension_name=boardnotices
 extension_path=phpBB/ext/fq/
+docker_source=/src
 
 sectors=$(( ${size} * 1024 * 1024 / 512 ))
 mount_point=${TMPDIR}/${volume_name}
