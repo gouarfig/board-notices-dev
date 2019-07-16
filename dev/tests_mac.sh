@@ -48,9 +48,7 @@ php phpBB/vendor/bin/phpunit \
   --configuration ${extension_path}${extension_name}/phpunit.xml \
   --bootstrap tests/bootstrap.php \
   --testsuite "Extension Test Suite" \
-  --coverage-html ${coverage_folder} \
-  --log-junit ${coverage_folder}/phpunit.xml \
-  --coverage-clover ${coverage_folder}/phpunit.coverage.xml
+  --coverage-html ${coverage_folder}
 
 cd ..
 
